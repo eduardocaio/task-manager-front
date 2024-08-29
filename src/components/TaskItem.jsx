@@ -1,9 +1,26 @@
+import './TaskItem.scss'
+
+import { MdDelete } from "react-icons/md";
+
+
 const TaskItem = ({ task }) => {
 
-    return (<>
-        <h1>{task.description}</h1>
-        <p>{task.status ? 'Completa' : 'Não completa'}</p>
-    </>);
+    return (
+        <div className="task-item-container">
+            <div className="task-description">
+                <label className={task.status ? 'checkbox-container-completed' : 'checkbox-container'}>
+                    {task.description}
+                    <input type="checkbox" defaultChecked={task.status}/>
+                    <span className={task.status ? 'checkmark completed' : 'checkmark'}></span>
+                </label>
+            </div>
+
+            <div className="delete">
+                <MdDelete size={18} color="#F97474"/>
+            </div>
+            
+        </div>
+    );
 };
 
 export default TaskItem;
