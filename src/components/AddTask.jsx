@@ -8,7 +8,7 @@ import { FaPlus } from "react-icons/fa6";
 import axios from "axios";
 import { useAlert } from "react-alert";
 
-const AddTask = () => {
+const AddTask = ({fetchTasks}) => {
     const [task, setTask] = useState("")
 
     const alert = useAlert();
@@ -24,8 +24,13 @@ const AddTask = () => {
                 return alert.error("A tarefa precisa de uma descrição para ser adicionada!")
             }
             await axios.post('http://localhost:8080/tasks', {description: task, status: false});
+
+            await fetchTasks();
+
+            setTask("");
+
         } catch (error) {
-            
+            alert.error(error);
         }
     }
 
