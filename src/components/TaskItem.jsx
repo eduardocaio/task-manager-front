@@ -6,13 +6,15 @@ import './TaskItem.scss'
 import { MdDelete } from "react-icons/md";
 
 
-const TaskItem = ({ task }) => {
+const TaskItem = ({ task, fetchTasks }) => {
 
     const alert = useAlert();
 
     const handleTaskDeletion = async () =>{
         try {
             await axios.delete(`http://localhost:8080/tasks/${task.id}`);
+            await fetchTasks();
+            alert.success("A tarefa foi removida com sucesso!")
         } catch (error) {
             alert.error("Algo deu errado.");
         }
